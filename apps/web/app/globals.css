@@ -1,0 +1,579 @@
+@import "../styles/tokens.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   GLASS MORPHISM UTILITIES
+   ========================================================= */
+.glass {
+  background: var(--glass-bg, rgba(13, 17, 20, 0.72));
+  border: 1px solid var(--glass-border, rgba(57, 255, 136, 0.08));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(15, 157, 88, 0.12);
+}
+
+/* =========================================================
+   GRADIENT SURFACES
+   ========================================================= */
+.gradient-surface {
+  background: linear-gradient(135deg, var(--surface-1) 0%, var(--surface-2) 100%);
+}
+.gradient-hero {
+  background: linear-gradient(160deg, var(--surface-1) 0%, rgba(57, 255, 136, 0.04) 50%, var(--surface-1) 100%);
+}
+
+/* =========================================================
+   TOAST NOTIFICATIONS
+   ========================================================= */
+#toast-root {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+  max-width: 24rem;
+  width: calc(100vw - 2rem);
+}
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: toast-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.toast.toast-exit {
+  animation: toast-out 0.2s ease-in forwards;
+}
+.toast-success {
+  border-color: rgba(57, 255, 136, 0.35);
+  background: linear-gradient(135deg, var(--surface-1), rgba(57, 255, 136, 0.06));
+}
+.toast-error {
+  border-color: rgba(255, 92, 108, 0.35);
+  background: linear-gradient(135deg, var(--surface-1), rgba(255, 92, 108, 0.06));
+}
+.toast-warning {
+  border-color: rgba(255, 200, 87, 0.35);
+  background: linear-gradient(135deg, var(--surface-1), rgba(255, 200, 87, 0.06));
+}
+.toast-info {
+  border-color: rgba(91, 192, 255, 0.35);
+  background: linear-gradient(135deg, var(--surface-1), rgba(91, 192, 255, 0.06));
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(100%) scale(0.95); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes toast-out {
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to   { opacity: 0; transform: translateX(100%) scale(0.9); }
+}
+
+/* =========================================================
+   SKELETON SHIMMER VARIANTS
+   ========================================================= */
+.skeleton-text {
+  height: 1em;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+}
+.skeleton-text:last-child { width: 70%; }
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+.progress-bar-track {
+  width: 100%;
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(57, 255, 136, 0.7) 100%);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+.progress-bar-indeterminate {
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  border-radius: 999px;
+  animation: indeterminate 1.4s ease-in-out infinite;
+  width: 40%;
+}
+@keyframes indeterminate {
+  0% { transform: translateX(-250%); }
+  100% { transform: translateX(350%); }
+}
+
+/* =========================================================
+   STAT TILE TREND INDICATORS
+   ========================================================= */
+.stat-trend-up { color: var(--accent); }
+.stat-trend-down { color: var(--danger); }
+.stat-trend-neutral { color: var(--text-muted); }
+
+/* =========================================================
+   PAGE SLIDE-UP TRANSITION
+   ========================================================= */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.slide-up { animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.slide-in-left { animation: slide-in-left 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+/* =========================================================
+   ANIMATIONS & KEYFRAMES (PHASE 6)
+   ========================================================= */
+@keyframes progress-indeterminate {
+  0% { transform: translateX(-100%); width: 30%; }
+  50% { transform: translateX(50%); width: 60%; }
+  100% { transform: translateX(200%); width: 30%; }
+}
+.animate-progress-indeterminate {
+  animation: progress-indeterminate 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Micro button tap and active scale */
+button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Smooth dropdown / popover entry */
+.scale-in {
+  animation: scale-pop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes scale-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Slide in from left for mobile drawer */
+.slide-in-left {
+  animation: slide-drawer 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slide-drawer {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Smooth Page Transitions */
+.page-enter {
+  animation: page-fade-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes page-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-ping, .animate-pulse, .animate-bounce {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   APP LOADING SCREEN
+   ========================================================= */
+.app-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.app-loading-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--surface-2), var(--surface-1));
+  border: 1px solid rgba(57, 255, 136, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 32px var(--accent-glow);
+  animation: logo-pulse 1.8s ease-in-out infinite;
+}
+@keyframes logo-pulse {
+  0%, 100% { box-shadow: 0 0 24px var(--accent-glow); }
+  50% { box-shadow: 0 0 48px rgba(57, 255, 136, 0.35); }
+}
+
+/* =========================================================
+   SCORE / CONFIDENCE BAR
+   ========================================================= */
+.score-bar-track {
+  width: 100%;
+  height: 4px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.score-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================
+   TABLE STYLES
+   ========================================================= */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.data-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.data-table td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: rgba(57, 255, 136, 0.03); }
+
+/* =========================================================
+   MULTI-STEP FORM
+   ========================================================= */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 2px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.step-dot.active {
+  border-color: var(--accent);
+  background: rgba(57, 255, 136, 0.15);
+  color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.step-dot.done {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  min-width: 24px;
+  transition: background 0.3s ease;
+}
+.step-line.done { background: var(--accent); }
+
+/* =========================================================
+   CONFIDENCE HEATMAP (ML Lab)
+   ========================================================= */
+.heatmap-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: transform 0.15s ease;
+}
+.heatmap-cell:hover { transform: scale(1.05); }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  touch-action: manipulation;
+}
+
+/* No Scrollbar Utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.fade-in {
+  animation: fade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+button, input, select, textarea {
+  min-height: 44px;
+}
+
+a.btn-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2), var(--border), var(--surface-2));
+  background-size: 200% 100%;
+  animation: sk 1.2s linear infinite;
+  border-radius: 10px;
+}
+
+@keyframes sk {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* 3D Depth & Majestic Midnight Visual Effects */
+.card-shadow {
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(57, 255, 136, 0.3);
+}
+
+/* Neon glow for primary actions specified in blueprint §2.3 */
+.neon-glow {
+  box-shadow: 0 0 0 1px var(--accent), 0 0 24px var(--accent-glow);
+}
+
+.btn-primary-neon {
+  background-color: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 20px var(--accent-glow);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-neon:hover {
+  box-shadow: 0 0 0 1px var(--accent), 0 0 28px rgba(57, 255, 136, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Radial Neon Glow top-right on hero page (Blueprint §2.3) */
+.hero-glow-bg {
+  position: relative;
+}
+
+.hero-glow-bg::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -100px;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, rgba(57, 255, 136, 0.05) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+/* Emergency slow pulse specified in blueprint §2.3 */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.005); }
+}
+
+.emergency-pulse {
+  animation: pulse-slow 2.8s ease-in-out infinite;
+}
+
+/* Custom scrollbars matching midnight theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border);
+}
+
+/* =========================================================
+   3D PERSPECTIVE & ARTISTIC EFFECTS (WATERMELON / MANUS UI)
+   ========================================================= */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-1200 {
+  perspective: 1200px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+.translate-z-40 {
+  transform: translateZ(40px);
+}
+
+.glass-specular {
+  position: relative;
+}
+.glass-specular::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  pointer-events: none;
+}
+
+.card-hover-elevate {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.card-hover-elevate:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 16px 36px -8px var(--accent-glow), 0 0 0 1px var(--accent);
+}
+
+/* Watermelon UI Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
